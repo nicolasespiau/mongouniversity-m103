@@ -1,0 +1,4 @@
+#!/bin/bash
+curl -s https://s3.amazonaws.com/edu-static.mongodb.com/lessons/M103/m103_validation.tgz -o m103_validation.tgz
+sudo tar -xzvf m103_validation.tgz -C /var/m103/validation
+rm -rf m103_validation.tgz

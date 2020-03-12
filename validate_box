@@ -1,0 +1,2 @@
+#!/bin/bash
+echo -n 'm103 rocks' | openssl sha256 | sed -e s/\(stdin\)=.//
