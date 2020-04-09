@@ -37,6 +37,9 @@ RUN chown -R vagrant:vagrant /home/vagrant/data
 RUN mkdir -p /var/vagrant/validation
 RUN sudo echo "export LC_ALL=C" >> /home/vagrant/.profile
 RUN sudo echo "PATH=$PATH:/var/vagrant/validation" >> /home/vagrant/.profile
+# added for chapter1 lab "Change the default DB path" and following labs
+RUN mkdir -p /var/mongodb/db
+RUN chown -R vagrant:vagrant /var/mongodb/db
 
 # INSTALL PYMONGO
 RUN sudo apt-get -y install python-pip

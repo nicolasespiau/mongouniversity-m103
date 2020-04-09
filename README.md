@@ -6,6 +6,8 @@ This project aims to allow user that are already using Docker to perform [m103 c
 
 ## How it works
 
+:warning: **On this branch you have to rebuild the Docker image in order to include in the build some steps made in previous labs.**
+
 First build the image:
 ```bash
 docker build -t local/m103mongosrv .
