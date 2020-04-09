@@ -6,6 +6,8 @@ This project aims to allow user that are already using Docker to perform [m103 c
 
 ## How it works
 
+:warning: **If you work on this lab from scratch (without having done the previous ones) then don't forget to create the application user. Script in `cmd.sh`**
+
 First build the image:
 ```bash
 docker build -t local/m103mongosrv .
