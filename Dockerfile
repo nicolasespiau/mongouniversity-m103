@@ -25,17 +25,18 @@ RUN sudo echo 'security:'  | sudo tee -a /etc/mongod.conf
 RUN sudo echo '  authorization: enabled'  | sudo tee -a /etc/mongod.conf
 
 # SET USER SETUP
-RUN sudo useradd -m m103
+## we need to create a user named 'vagrant' for the sake of some validations
+RUN sudo useradd -m vagrant
 RUN sudo sh -c "killall mongod; true"
 RUN sudo mkdir -p /data
 RUN sudo chmod -R 777 /data
 RUN mkdir -p /data/db
-RUN mkdir -p /home/m103/data
-RUN chmod -R 777 /home/m103/data
-RUN chown -R m103:m103 /home/m103/data
-RUN mkdir -p /var/m103/validation
-RUN sudo echo "export LC_ALL=C" >> /home/m103/.profile
-RUN sudo echo "PATH=$PATH:/var/m103/validation" >> /home/m103/.profile
+RUN mkdir -p /home/vagrant/data
+RUN chmod -R 777 /home/vagrant/data
+RUN chown -R vagrant:vagrant /home/vagrant/data
+RUN mkdir -p /var/vagrant/validation
+RUN sudo echo "export LC_ALL=C" >> /home/vagrant/.profile
+RUN sudo echo "PATH=$PATH:/var/vagrant/validation" >> /home/vagrant/.profile
 
 # INSTALL PYMONGO
 RUN sudo apt-get -y install python-pip
@@ -53,10 +54,14 @@ RUN tar -xzvf products.part2.json.tgz -C /dataset
 RUN rm -rf products.part2.json.tgz
 
 # DL VALIDATORS
-COPY download_validators /var/m103/validation/download_validators
-COPY validate_box /var/m103/validation/validate_box
+COPY download_validators /var/vagrant/validation/download_validators
+COPY validate_box /var/vagrant/validation/validate_box
 RUN curl -s https://s3.amazonaws.com/edu-static.mongodb.com/lessons/M103/m103_validation.tgz -o m103_validation.tgz
-RUN tar -xzvf m103_validation.tgz -C /var/m103/validation
+RUN tar -xzvf m103_validation.tgz -C /var/vagrant/validation
 RUN rm -rf m103_validation.tgz
-RUN chmod -R +x /var/m103/validation/
-RUN chown root:root /var/m103/validation
+RUN chmod -R +x /var/vagrant/validation/
+RUN chown root:root /var/vagrant/validation
+
+COPY verifyip /home/vagrant/verifyip
+RUN chmod +x /home/vagrant/verifyip
+ENTRYPOINT /home/vagrant/verifyip && bash

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+function verify_ip() {
+  export EXPECTED_IP=192.168.103.100
+  ifconfig | grep $EXPECTED_IP
+  ret=$?
+  if [ $ret -ne 0 ]
+  then
+    echo "The VM does not have the expected IP: $EXPECTED_IP
+instead it has: $CLIENT_IP_ADDR
+Ensure no other container has that same expected IP: $EXPECTED_IP
+You should destroy this container with 'docker stop CONTAINERID && docker rm CONTAINERID'
+And then ensure a network exists with the proper subnet CIDR with 'docker network inspect --format \"{{.Name}}: {{range .IPAM.Config}}{{.Subnet}}{{end}}\" $(docker network ls -q)'
+Finally restart the container using the option 'docker run --ip 192.168.103.100 ...'"
+    fatal "$ERR"
+  fi
+}
+
+function fatal() {
+  echo ERROR
+  echo "$1"
+  exit 1
+}
+
+verify_ip

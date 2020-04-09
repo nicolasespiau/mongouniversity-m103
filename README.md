@@ -11,10 +11,17 @@ First build the image:
 docker build -t local/m103mongosrv .
 ```
 
+Create the network:
+```sh
+docker network create --subnet 192.168.0.0/16 m103
+```
+
 Run the container:
 ```bash
-docker run -dt --rm --name m103 --cpus2 -v PATH/TO/YOUR/PROJECT/DIR/shared:/shared -p 27017:27017 local/m103mongosrv
+docker run -dt --rm --name m103 --net m103 --ip 192.168.103.100 --cpus 2 -v PATH/TO/YOUR/PROJECT/DIR/shared:/shared local/m103mongosrv
 ```
+
+This image does not run mongod by default. It only create the container and keep it alive so you can exec a bash on it and then launch mongod with the different configuration you need.
 
 To connect to the machine, instead of `vagrant ssh`:
 ```bash
