@@ -6,7 +6,7 @@ This project aims to allow user that are already using Docker to perform [m103 c
 
 ## How it works
 
-:warning: **If you work on this lab from scratch (without having done the previous ones) then don't forget to create the application user. Script in `cmd.sh`**
+:warning: **If you work on this lab from scratch (without having done the previous ones) you will have to run `sh /shared/cmd.sh` on the container**
 
 First build the image:
 ```bash
