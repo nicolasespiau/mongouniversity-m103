@@ -7,7 +7,6 @@ This project aims to allow user that are already using Docker to perform [m103 c
 ## How it works
 
 :warning 1: **If you work on this lab from scratch (without having done the previous ones) you will have to run `sh /shared/cmd.sh` on the container**
-:warning 2: **In this lab the VM hostname should be m103. In order to be compliant you will have to run `sh /shared/renameHost.sh` on the container wether you are doing this lab from scratch or not**
 
 First build the image:
 ```bash
