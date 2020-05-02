@@ -1,1 +1,4 @@
 /.DS_Store
+/shared/mongod-repl-4.conf
+/shared/mongod-repl-5.conf
+/shared/mongod-repl-6.conf

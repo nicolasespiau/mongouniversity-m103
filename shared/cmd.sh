@@ -95,3 +95,7 @@ echo "\n\nSharding replica set"
 mongo admin --host 192.168.103.100:26000 -u m103-admin -p m103-pass --eval '
   sh.addShard("m103-repl/192.168.103.100:27001")
 '
+
+sh /shared/addReplset.sh
+sh /shared/importDataset.sh
+sh /shared/shardCollection.sh
